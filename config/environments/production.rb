@@ -1,6 +1,15 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+    login: "heltonsmith-facilitator_api1.hotmail.com",
+    password: "V7X9FSNW7FJRKHB3",
+    signature: "AFcWxV21C7fd0v3bYYYRCpSSRl31AzSFP0M1RUYq-r07MSfHesTbk5Jv"
+    }
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+   end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
