@@ -14,11 +14,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root to: "home#index"
+  
   resource :cart, only: [:show, :update] do
     member do
       post :pay_with_paypal
       get  :process_paypal_payment
     end
   end
+
+  root "home#index"
 end
