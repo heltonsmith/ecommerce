@@ -1,5 +1,9 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
+
+  def exito 
+
+  end
   
   def update
     product = params[:cart][:product_id]
@@ -37,7 +41,7 @@ class CartsController < ApplicationController
       token: response.token
     )
 
-    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token), allow_other_host: true
   end
 
   def process_paypal_payment
@@ -65,6 +69,11 @@ class CartsController < ApplicationController
         order.save!
         payment.save!
       end
+
     end
+
+    redirect_to carts_exito_path
   end
+
+
 end
